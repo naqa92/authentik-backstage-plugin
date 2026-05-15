@@ -1,0 +1,44 @@
+name: Publish Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/publish-docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write # needed to push the gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0 # needed for edit_uri + git timestamps
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+
+      - name: Set cache id
+        run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+
+      - name: Cache MkDocs material
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+
+      - name: Install MkDocs Material
+        run: pip install --no-cache-dir mkdocs-material pymdown-extensions Pygments
+
+      - name: Deploy
+        run: mkdocs gh-deploy --force --config-file site/mkdocs.yml

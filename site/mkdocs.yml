@@ -1,0 +1,69 @@
+site_name: Backstage Plugin — Authentik
+site_description: Backstage catalog backend module that ingests users and groups from Authentik
+site_url: https://naqa92.github.io/authentik-backstage-plugin/
+repo_url: https://github.com/naqa92/authentik-backstage-plugin
+repo_name: naqa92/authentik-backstage-plugin
+edit_uri: edit/main/site/docs/
+
+nav:
+  - Home: index.md
+  - Plugin:
+      - Overview: plugin/overview.md
+      - Backend Module:
+          - About: plugin/backend/about.md
+          - Install: plugin/backend/install.md
+          - Configure: plugin/backend/configure.md
+          - Troubleshooting: plugin/backend/troubleshooting.md
+
+theme:
+  name: material
+  # logo: images/authentik-logo.png
+  # favicon: images/favicon.png
+  features:
+    - content.code.copy
+    - content.code.select
+    - content.action.edit
+    - content.action.view
+    - navigation.footer
+    - navigation.sections
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: grey
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: false
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      toc_depth: 3
+      permalink: "#"
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/naqa92/authentik-backstage-plugin

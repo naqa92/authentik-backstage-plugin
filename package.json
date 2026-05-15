@@ -1,0 +1,69 @@
+{
+  "name": "@naqa92/backstage-plugin-catalog-backend-module-authentik",
+  "version": "0.1.0",
+  "description": "Backstage catalog backend module that ingests users and groups from Authentik as Backstage User and Group entities.",
+  "license": "Apache-2.0",
+  "author": "naqa92 <contact@zoneinfra.com>",
+  "homepage": "https://github.com/naqa92/authentik-backstage-plugin#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naqa92/authentik-backstage-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/naqa92/authentik-backstage-plugin/issues"
+  },
+  "keywords": [
+    "backstage",
+    "backstage-plugin",
+    "authentik",
+    "catalog",
+    "sso",
+    "identity"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.cjs.js",
+    "types": "dist/index.d.ts"
+  },
+  "backstage": {
+    "role": "backend-plugin-module",
+    "pluginId": "catalog",
+    "pluginPackage": "@backstage/plugin-catalog-backend"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "yarn tsc && backstage-cli package build",
+    "clean": "backstage-cli package clean && rm -rf dist-types",
+    "lint": "backstage-cli package lint",
+    "test": "backstage-cli package test",
+    "test:ci": "backstage-cli package test --coverage --watchAll=false",
+    "prepack": "backstage-cli package prepack",
+    "postpack": "backstage-cli package postpack"
+  },
+  "peerDependencies": {
+    "@backstage/backend-plugin-api": "^1.9.0",
+    "@backstage/catalog-model": "^1.8.0",
+    "@backstage/config": "^1.3.7",
+    "@backstage/plugin-catalog-node": "^2.2.0"
+  },
+  "devDependencies": {
+    "@backstage/backend-plugin-api": "^1.9.0",
+    "@backstage/catalog-model": "^1.8.0",
+    "@backstage/cli": "^0.34.6",
+    "@backstage/config": "^1.3.7",
+    "@backstage/plugin-catalog-node": "^2.2.0",
+    "@backstage/types": "^1.2.2",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^24.0.0",
+    "typescript": "~5.7.0"
+  },
+  "packageManager": "yarn@4.14.1"
+}

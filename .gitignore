@@ -1,0 +1,27 @@
+node_modules/
+dist/
+dist-types/
+*.tsbuildinfo
+coverage/
+.env
+*.tgz
+*.log
+
+# Internal planning docs (not for the public repo)
+PLAN.md
+
+# Yarn (Berry / node-modules linker)
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# MkDocs build artifacts
+site/.cache/
+site/site/
+
+# OS
+.DS_Store

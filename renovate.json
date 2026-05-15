@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "dependencyDashboard": true,
+  
+  "dependencyDashboardTitle": "Dependency Dashboard",
+  
+  "osvVulnerabilityAlerts": true,
+  "schedule": [
+    "before 5am on monday"
+  ],
+  "packageRules": [
+    {
+      "description": "Pin GitHub Actions to commit SHAs (supply-chain hardening)",
+      "matchManagers": ["github-actions"],
+      "pinDigests": true
+    },
+    {
+      "description": "Group all non-major dependencies together",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    
+    {
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": false
+    },
+    {
+      "description": "Security updates",
+      "matchUpdateTypes": ["security"],
+      "labels": ["security"],
+      "automerge": false
+    }
+  ]
+}
