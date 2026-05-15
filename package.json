@@ -1,6 +1,6 @@
 {
   "name": "@naqa92/backstage-plugin-catalog-backend-module-authentik",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Backstage catalog backend module that ingests users and groups from Authentik as Backstage User and Group entities.",
   "license": "Apache-2.0",
   "author": "naqa92 <contact@zoneinfra.com>",
@@ -64,6 +64,14 @@
     "@types/jest": "^29.5.0",
     "@types/node": "^24.0.0",
     "typescript": "~5.7.0"
+  },
+  "resolutions": {
+    "@octokit/plugin-paginate-rest": "^9.2.2",
+    "@octokit/request": "^8.4.1",
+    "@octokit/request-error": "^5.1.1",
+    "@tootallnate/once": "^3.0.1",
+    "koa": "^2.16.2",
+    "underscore": "^1.13.8"
   },
   "packageManager": "yarn@4.14.1"
 }
