@@ -31,6 +31,18 @@ describe('readAuthentikConfig', () => {
     expect(cfg.excludeGroups).toEqual(['authentik-internal']);
   });
 
+  it('defaults includeServiceAccounts to false when absent', () => {
+    const cfg = readAuthentikConfig(configFrom(baseConfig));
+    expect(cfg.includeServiceAccounts).toBe(false);
+  });
+
+  it('reads includeServiceAccounts when set to true', () => {
+    const cfg = readAuthentikConfig(
+      configFrom({ ...baseConfig, includeServiceAccounts: true }),
+    );
+    expect(cfg.includeServiceAccounts).toBe(true);
+  });
+
   it('throws when token is missing', () => {
     expect(() =>
       readAuthentikConfig(configFrom({ baseUrl: baseConfig.baseUrl })),

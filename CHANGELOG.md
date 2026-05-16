@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] — 2026-05-16
+
+### Fixed
+
+- **Dangling `memberOf` relations after `excludeGroups`**: when a group
+  was filtered out by `excludeGroups`, users that belonged to it kept
+  the group name in their `spec.memberOf`. Backstage then surfaced
+  `This entity has relations to other entities, which can't be found
+  in the catalog. Entities not found are: group:default/<excluded>` on
+  user pages and rendered the group as a broken clickable link. `parseUser`
+  now accepts an optional `validGroupNames: ReadonlySet<string>` and the
+  provider passes the set of groups that survived `excludeGroups`, so
+  `memberOf` is restricted to groups actually present in the catalog.
+- **Service-account users polluting the catalog**: Authentik embedded
+  outpost accounts (e.g. `ak-outpost-…`) have `is_active: true` but
+  `type: "internal_service_account"`. They were imported as regular
+  users, surfacing as `Outpost authentik Embedded Outpost Service-Account`
+  in the catalog. The provider now skips users whose `type` is
+  `service_account` or `internal_service_account` by default. Set
+  `catalog.providers.authentik.includeServiceAccounts: true` to opt
+  back into the previous behaviour.
+
+### Added
+
+- `type` field on `AuthentikUser` (mirrors the Authentik API).
+- `catalog.providers.authentik.includeServiceAccounts` config option
+  (boolean, defaults to `false`).
+- Tests covering the `validGroupNames` filter in `parseUser` and the
+  new config option.
+
 ## [0.1.2] — 2026-05-16
 
 ### Fixed
@@ -68,7 +98,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   labeler, stale bot.
 - MkDocs Material documentation site deployed to GitHub Pages.
 
-[Unreleased]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/naqa92/authentik-backstage-plugin/releases/tag/v0.1.0

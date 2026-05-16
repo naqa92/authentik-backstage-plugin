@@ -25,6 +25,7 @@ describe('parseUser', () => {
     email: 'alice@example.com',
     avatar: 'https://cdn.example.com/alice.png',
     is_active: true,
+    type: 'internal',
     groups_obj: [
       { pk: 'g-1', name: 'Engineers', parent_name: null },
       { pk: 'g-2', name: 'Admins', parent_name: 'Engineers' },
@@ -55,6 +56,20 @@ describe('parseUser', () => {
   it('omits the email field when the Authentik user has no email', () => {
     const entity = parseUser({ ...userFixture, email: '' }, baseUrl);
     expect(entity.spec.profile).not.toHaveProperty('email');
+  });
+
+  it('keeps only memberOf entries present in validGroupNames', () => {
+    const entity = parseUser(
+      userFixture,
+      baseUrl,
+      new Set(['engineers']),
+    );
+    expect(entity.spec.memberOf).toEqual(['engineers']);
+  });
+
+  it('drops all memberOf when no Authentik groups remain after exclusion', () => {
+    const entity = parseUser(userFixture, baseUrl, new Set());
+    expect(entity.spec.memberOf).toEqual([]);
   });
 });
 

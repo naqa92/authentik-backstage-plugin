@@ -7,9 +7,6 @@ coverage/
 *.tgz
 *.log
 
-# Internal planning docs (not for the public repo)
-PLAN.md
-
 # Yarn (Berry / node-modules linker)
 .pnp.*
 .yarn/*

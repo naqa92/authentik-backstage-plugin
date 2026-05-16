@@ -16,7 +16,15 @@ function withLocations(
   };
 }
 
-export function parseUser(user: AuthentikUser, baseUrl: string): UserEntity {
+export function parseUser(
+  user: AuthentikUser,
+  baseUrl: string,
+  validGroupNames?: ReadonlySet<string>,
+): UserEntity {
+  const memberOf = user.groups_obj
+    .map(g => sanitizeName(g.name))
+    .filter(name => !validGroupNames || validGroupNames.has(name));
+
   return {
     apiVersion: 'backstage.io/v1alpha1',
     kind: 'User',
@@ -32,7 +40,7 @@ export function parseUser(user: AuthentikUser, baseUrl: string): UserEntity {
         ...(user.email ? { email: user.email } : {}),
         picture: user.avatar,
       },
-      memberOf: user.groups_obj.map(g => sanitizeName(g.name)),
+      memberOf,
     },
   };
 }

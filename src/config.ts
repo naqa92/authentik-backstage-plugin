@@ -8,6 +8,7 @@ export interface AuthentikProviderConfig {
   baseUrl: string;
   token: string;
   excludeGroups: string[];
+  includeServiceAccounts: boolean;
   schedule?: SchedulerServiceTaskScheduleDefinition;
 }
 
@@ -18,6 +19,8 @@ export function readAuthentikConfig(config: Config): AuthentikProviderConfig {
     baseUrl: c.getString('baseUrl').replace(/\/$/, ''),
     token: c.getString('token'),
     excludeGroups: c.getOptionalStringArray('excludeGroups') ?? [],
+    includeServiceAccounts:
+      c.getOptionalBoolean('includeServiceAccounts') ?? false,
     schedule: scheduleConfig
       ? readSchedulerServiceTaskScheduleDefinitionFromConfig(scheduleConfig)
       : undefined,

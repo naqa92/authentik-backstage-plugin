@@ -20,6 +20,12 @@ catalog:
         - authentik-admins
         - authentik-read-only
 
+      # Optional: include Authentik service-account users (e.g. embedded
+      # outpost accounts) in the catalog. Defaults to `false` — those
+      # accounts have `is_active: true` but `type: internal_service_account`
+      # and are usually not humans.
+      includeServiceAccounts: false
+
       # Optional: override the default sync cadence.
       # Defaults: { frequency: { minutes: 30 }, timeout: { minutes: 3 },
       #            initialDelay: { seconds: 15 } }
@@ -92,7 +98,10 @@ schedule:
 
 ## What gets synced
 
-- Authentik users with `is_active: true` are exported as `User` entities.
+- Authentik users with `is_active: true` are exported as `User` entities,
+  **except** service accounts (`type: service_account` or
+  `internal_service_account`) which are skipped unless
+  `includeServiceAccounts: true` is set.
   Inactive users are **skipped entirely** — no `User` entity is created for
   them and they do not appear in any `Group.spec.members`.
 - All Authentik groups except those listed in `excludeGroups`.
@@ -106,14 +115,21 @@ the Authentik group name lowercased with any character outside
 `[a-z0-9\-_.]` replaced by `-`. So an Authentik group named `Authentik
 Admins` must be listed as `authentik-admins` (not `Authentik Admins`).
 
-Excluded groups affect only the `Group` entities produced by this plugin:
+When a group is excluded:
 
 - The `Group` entity is **not** created.
-- But `User.spec.memberOf` still lists the group's sanitized name for every
-  user that belongs to it. The reference is dangling (it points to a group
-  that does not exist in the catalog) — Backstage handles this gracefully
-  by ignoring the missing target, so it does not break anything; just be
-  aware if you query the relationship.
+- `User.spec.memberOf` is also cleaned up — the excluded group name is
+  removed from every user's membership list, so no user ends up pointing
+  to an entity that does not exist in the catalog.
+
+## Service-account users
+
+Authentik creates `internal_service_account` users automatically (e.g. the
+embedded outpost user named `ak-outpost-…`). These are active by default
+but are not humans and typically should not appear in the catalog. The
+provider skips them out of the box. Set `includeServiceAccounts: true` if
+you specifically want them as `User` entities — for example to audit their
+permissions through Backstage.
 
 ## What does NOT get synced
 

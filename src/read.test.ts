@@ -61,6 +61,7 @@ describe('read', () => {
         email: '',
         avatar: '',
         is_active: true,
+        type: 'internal',
         groups_obj: [],
       },
     ];
@@ -125,6 +126,7 @@ describe('read', () => {
         email: '',
         avatar: '',
         is_active: true,
+        type: 'internal',
         groups_obj: [],
       },
     ];

@@ -31,6 +31,7 @@ export interface AuthentikUser {
   email: string;
   avatar: string;
   is_active: boolean;
+  type: string;
   groups_obj: AuthentikGroupRef[];
 }
 

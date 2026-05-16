@@ -7,6 +7,11 @@ import { AuthentikProviderConfig } from './config';
 import { readUsers, readGroups } from './read';
 import { parseUser, parseGroup, sanitizeName } from './transform';
 
+const SERVICE_ACCOUNT_TYPES: ReadonlySet<string> = new Set([
+  'service_account',
+  'internal_service_account',
+]);
+
 export class AuthentikEntityProvider implements EntityProvider {
   private connection?: EntityProviderConnection;
 
@@ -43,14 +48,23 @@ export class AuthentikEntityProvider implements EntityProvider {
         groups.map(g => [g.pk, sanitizeName(g.name)]),
       );
 
-      const userEntities = users
-        .filter(u => u.is_active)
-        .map(u => parseUser(u, baseUrl));
-
       const { excludeGroups } = this.config;
       const filteredGroups = excludeGroups.length
         ? groups.filter(g => !excludeGroups.includes(sanitizeName(g.name)))
         : groups;
+
+      const validGroupNames = new Set(
+        filteredGroups.map(g => sanitizeName(g.name)),
+      );
+
+      const { includeServiceAccounts } = this.config;
+      const userEntities = users
+        .filter(
+          u =>
+            u.is_active &&
+            (includeServiceAccounts || !SERVICE_ACCOUNT_TYPES.has(u.type)),
+        )
+        .map(u => parseUser(u, baseUrl, validGroupNames));
 
       const groupEntities = filteredGroups.map(g => {
         const children = groups
