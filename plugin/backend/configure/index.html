@@ -632,6 +632,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#service-account-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service-account users
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-does-not-get-synced" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -826,6 +837,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#service-account-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service-account users
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-does-not-get-synced" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -899,13 +921,19 @@
 </span><span id="__span-0-15"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">authentik-admins</span>
 </span><span id="__span-0-16"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">authentik-read-only</span>
 </span><span id="__span-0-17">
-</span><span id="__span-0-18"><span class="w">      </span><span class="c1"># Optional: override the default sync cadence.</span>
-</span><span id="__span-0-19"><span class="w">      </span><span class="c1"># Defaults: { frequency: { minutes: 30 }, timeout: { minutes: 3 },</span>
-</span><span id="__span-0-20"><span class="w">      </span><span class="c1">#            initialDelay: { seconds: 15 } }</span>
-</span><span id="__span-0-21"><span class="w">      </span><span class="nt">schedule</span><span class="p">:</span>
-</span><span id="__span-0-22"><span class="w">        </span><span class="nt">frequency</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> minutes</span><span class="p">:</span><span class="w"> </span><span class="nv">60</span><span class="w"> </span><span class="p p-Indicator">}</span>
-</span><span id="__span-0-23"><span class="w">        </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> minutes</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="w"> </span><span class="p p-Indicator">}</span>
-</span><span id="__span-0-24"><span class="w">        </span><span class="nt">initialDelay</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> seconds</span><span class="p">:</span><span class="w"> </span><span class="nv">30</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</span><span id="__span-0-18"><span class="w">      </span><span class="c1"># Optional: include Authentik service-account users (e.g. embedded</span>
+</span><span id="__span-0-19"><span class="w">      </span><span class="c1"># outpost accounts) in the catalog. Defaults to `false` — those</span>
+</span><span id="__span-0-20"><span class="w">      </span><span class="c1"># accounts have `is_active: true` but `type: internal_service_account`</span>
+</span><span id="__span-0-21"><span class="w">      </span><span class="c1"># and are usually not humans.</span>
+</span><span id="__span-0-22"><span class="w">      </span><span class="nt">includeServiceAccounts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span id="__span-0-23">
+</span><span id="__span-0-24"><span class="w">      </span><span class="c1"># Optional: override the default sync cadence.</span>
+</span><span id="__span-0-25"><span class="w">      </span><span class="c1"># Defaults: { frequency: { minutes: 30 }, timeout: { minutes: 3 },</span>
+</span><span id="__span-0-26"><span class="w">      </span><span class="c1">#            initialDelay: { seconds: 15 } }</span>
+</span><span id="__span-0-27"><span class="w">      </span><span class="nt">schedule</span><span class="p">:</span>
+</span><span id="__span-0-28"><span class="w">        </span><span class="nt">frequency</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> minutes</span><span class="p">:</span><span class="w"> </span><span class="nv">60</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</span><span id="__span-0-29"><span class="w">        </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> minutes</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</span><span id="__span-0-30"><span class="w">        </span><span class="nt">initialDelay</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> seconds</span><span class="p">:</span><span class="w"> </span><span class="nv">30</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </span></code></pre></div>
 <h2 id="authentik-token">Authentik token<a class="headerlink" href="#authentik-token" title="Permanent link">#</a></h2>
 <h3 id="via-the-admin-ui">Via the admin UI<a class="headerlink" href="#via-the-admin-ui" title="Permanent link">#</a></h3>
@@ -987,7 +1015,10 @@ commit it.</p>
 </span></code></pre></div>
 <h2 id="what-gets-synced">What gets synced<a class="headerlink" href="#what-gets-synced" title="Permanent link">#</a></h2>
 <ul>
-<li>Authentik users with <code>is_active: true</code> are exported as <code>User</code> entities.
+<li>Authentik users with <code>is_active: true</code> are exported as <code>User</code> entities,
+  <strong>except</strong> service accounts (<code>type: service_account</code> or
+  <code>internal_service_account</code>) which are skipped unless
+  <code>includeServiceAccounts: true</code> is set.
   Inactive users are <strong>skipped entirely</strong> — no <code>User</code> entity is created for
   them and they do not appear in any <code>Group.spec.members</code>.</li>
 <li>All Authentik groups except those listed in <code>excludeGroups</code>.</li>
@@ -999,15 +1030,20 @@ commit it.</p>
 the Authentik group name lowercased with any character outside
 <code>[a-z0-9\-_.]</code> replaced by <code>-</code>. So an Authentik group named <code>Authentik
 Admins</code> must be listed as <code>authentik-admins</code> (not <code>Authentik Admins</code>).</p>
-<p>Excluded groups affect only the <code>Group</code> entities produced by this plugin:</p>
+<p>When a group is excluded:</p>
 <ul>
 <li>The <code>Group</code> entity is <strong>not</strong> created.</li>
-<li>But <code>User.spec.memberOf</code> still lists the group's sanitized name for every
-  user that belongs to it. The reference is dangling (it points to a group
-  that does not exist in the catalog) — Backstage handles this gracefully
-  by ignoring the missing target, so it does not break anything; just be
-  aware if you query the relationship.</li>
+<li><code>User.spec.memberOf</code> is also cleaned up — the excluded group name is
+  removed from every user's membership list, so no user ends up pointing
+  to an entity that does not exist in the catalog.</li>
 </ul>
+<h2 id="service-account-users">Service-account users<a class="headerlink" href="#service-account-users" title="Permanent link">#</a></h2>
+<p>Authentik creates <code>internal_service_account</code> users automatically (e.g. the
+embedded outpost user named <code>ak-outpost-…</code>). These are active by default
+but are not humans and typically should not appear in the catalog. The
+provider skips them out of the box. Set <code>includeServiceAccounts: true</code> if
+you specifically want them as <code>User</code> entities — for example to audit their
+permissions through Backstage.</p>
 <h2 id="what-does-not-get-synced">What does NOT get synced<a class="headerlink" href="#what-does-not-get-synced" title="Permanent link">#</a></h2>
 <ul>
 <li>Roles, permissions, application assignments — only user/group membership.</li>
