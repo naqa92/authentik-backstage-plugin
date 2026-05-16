@@ -112,4 +112,40 @@ describe('read', () => {
       readUsers('https://authentik.example.com', 'bad-token'),
     ).rejects.toThrow(/401 Unauthorized/);
   });
+
+  // Regression test: Authentik returns pagination.next as a number (0 when
+  // there is no next page), NOT null/undefined. A strict null check would
+  // loop forever and eventually request page=0 (which 404s).
+  it('treats pagination.next === 0 as end-of-pagination (Authentik convention)', async () => {
+    const onlyPage: AuthentikUser[] = [
+      {
+        pk: 1,
+        username: 'alice',
+        name: 'Alice',
+        email: '',
+        avatar: '',
+        is_active: true,
+        groups_obj: [],
+      },
+    ];
+    fetchSpy.mockResolvedValueOnce(
+      mockResponse({
+        pagination: {
+          next: 0,
+          previous: 0,
+          count: 1,
+          current: 1,
+          total_pages: 1,
+          start_index: 1,
+          end_index: 1,
+        },
+        results: onlyPage,
+      }),
+    );
+
+    const users = await readUsers('https://authentik.example.com', 'token');
+
+    expect(users).toEqual(onlyPage);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+  });
 });

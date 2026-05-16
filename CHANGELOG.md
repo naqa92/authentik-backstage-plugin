@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] — 2026-05-16
+
+### Fixed
+
+- **Pagination loop on Authentik**: `read.ts` was using a strict null check
+  (`while (nextPage !== null)`) but Authentik returns `pagination.next: 0`
+  (a number, not `null`) when there is no next page. The loop kept iterating
+  with `page=0`, which returns `404 Not Found` and broke every sync —
+  surfacing in production as
+  `Authentik API /api/v3/core/groups/ failed: 404 Not Found`
+  and downstream `Login failed; ... unable to resolve user identity` in the
+  OIDC sign-in. Switched to a truthy check (`while (nextPage)`), which
+  correctly handles `0`, `null` and `undefined`.
+- Added regression test
+  `treats pagination.next === 0 as end-of-pagination (Authentik convention)`.
+
+### Notes
+
+- v0.1.0 and v0.1.1 are broken against any real Authentik instance — please
+  upgrade to v0.1.2.
+
 ## [0.1.1] — 2026-05-15
 
 ### Security
@@ -47,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   labeler, stale bot.
 - MkDocs Material documentation site deployed to GitHub Pages.
 
-[Unreleased]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/naqa92/authentik-backstage-plugin/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/naqa92/authentik-backstage-plugin/releases/tag/v0.1.0

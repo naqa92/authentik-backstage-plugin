@@ -10,9 +10,11 @@ async function fetchAll<T>(
   token: string,
 ): Promise<T[]> {
   const items: T[] = [];
+  // Authentik returns pagination.next as a number (0 when there is no next
+  // page, not null/undefined). Truthy check handles 0, null and undefined.
   let nextPage: number | null = 1;
 
-  while (nextPage !== null) {
+  while (nextPage) {
     const url = `${baseUrl}${path}?page_size=100&page=${nextPage}`;
     const res = await fetch(url, {
       headers: { Authorization: `Bearer ${token}` },
