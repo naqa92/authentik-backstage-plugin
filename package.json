@@ -70,7 +70,7 @@
     "@octokit/request": "^8.4.1",
     "@octokit/request-error": "^5.1.1",
     "@tootallnate/once": "^3.0.1",
-    "koa": "^2.16.2",
+    "koa": "^3.0.0",
     "underscore": "^1.13.8"
   },
   "packageManager": "yarn@4.14.1"
