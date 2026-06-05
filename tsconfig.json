@@ -4,6 +4,7 @@
   "exclude": ["node_modules", "dist", "dist-types"],
   "compilerOptions": {
     "outDir": "dist-types",
-    "rootDir": "."
+    "rootDir": ".",
+    "moduleResolution": "bundler"
   }
 }

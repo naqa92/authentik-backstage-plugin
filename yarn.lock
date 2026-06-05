@@ -2295,6 +2295,7 @@ __metadata:
     "@backstage/types": "npm:^1.2.2"
     "@types/jest": "npm:^29.5.0"
     "@types/node": "npm:^24.0.0"
+    eslint-plugin-jest: "npm:^28.14.0"
     typescript: "npm:~5.7.0"
   peerDependencies:
     "@backstage/backend-plugin-api": ^1.9.0
@@ -6780,7 +6781,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:^28.9.0":
+"eslint-plugin-jest@npm:^28.14.0, eslint-plugin-jest@npm:^28.9.0":
   version: 28.14.0
   resolution: "eslint-plugin-jest@npm:28.14.0"
   dependencies:
