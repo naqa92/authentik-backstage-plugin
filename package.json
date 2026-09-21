@@ -69,7 +69,7 @@
     "typescript": "~6.0.0"
   },
   "resolutions": {
-    "@octokit/plugin-paginate-rest": "^14.0.0",
+    "@octokit/plugin-paginate-rest": "^15.0.0",
     "@octokit/request": "^10.0.0",
     "@octokit/request-error": "^7.0.0",
     "@tootallnate/once": "^3.0.1",
