@@ -806,7 +806,7 @@ permissions.</p>
   permissions (these are separate).</li>
 <li>Try the same token manually:</li>
 </ul>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1">curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$AUTHENTIK_TOKEN</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1">curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$AUTHENTIK_TOKEN</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-2"><span class="w">     </span>https://authentik.example.com/api/v3/core/users/?page<span class="o">=</span><span class="m">1</span>
 </span></code></pre></div>
 <p>If <code>curl</code> returns 200 but Backstage still 401s, the env var is not being

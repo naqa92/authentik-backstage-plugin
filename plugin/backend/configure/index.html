@@ -916,7 +916,7 @@
 </span><span id="__span-0-10"><span class="w">      </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AUTHENTIK_TOKEN}</span>
 </span><span id="__span-0-11">
 </span><span id="__span-0-12"><span class="w">      </span><span class="c1"># Optional: groups (by name) to skip during sync. Useful for excluding</span>
-</span><span id="__span-0-13"><span class="w">      </span><span class="c1"># Authentik&#39;s built-in admin groups that should never reach the catalog.</span>
+</span><span id="__span-0-13"><span class="w">      </span><span class="c1"># Authentik's built-in admin groups that should never reach the catalog.</span>
 </span><span id="__span-0-14"><span class="w">      </span><span class="nt">excludeGroups</span><span class="p">:</span>
 </span><span id="__span-0-15"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">authentik-admins</span>
 </span><span id="__span-0-16"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">authentik-read-only</span>
@@ -962,7 +962,7 @@ blueprint entry:</p>
 </span><span id="__span-1-7"><span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="kt">!Find</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">authentik_core.user</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">username</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">akadmin</span><span class="p p-Indicator">]]</span>
 </span><span id="__span-1-8"><span class="w">    </span><span class="nt">intent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api</span>
 </span><span id="__span-1-9"><span class="w">    </span><span class="nt">expiring</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</span><span id="__span-1-10"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backstage</span><span class="nv"> </span><span class="s">catalog</span><span class="nv"> </span><span class="s">provider</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">read-only</span><span class="nv"> </span><span class="s">API</span><span class="nv"> </span><span class="s">access&quot;</span>
+</span><span id="__span-1-10"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Backstage</span><span class="nv"> </span><span class="s">catalog</span><span class="nv"> </span><span class="s">provider</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">read-only</span><span class="nv"> </span><span class="s">API</span><span class="nv"> </span><span class="s">access"</span>
 </span></code></pre></div>
 <h3 id="exposing-the-token-to-backstage">Exposing the token to Backstage<a class="headerlink" href="#exposing-the-token-to-backstage" title="Permanent link">#</a></h3>
 <p>Expose the token to Backstage as <code>AUTHENTIK_TOKEN</code> — env var, Kubernetes
@@ -1010,7 +1010,7 @@ commit it.</p>
 <p>Example with cron:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><span class="nt">schedule</span><span class="p">:</span>
 </span><span id="__span-2-2"><span class="w">  </span><span class="nt">frequency</span><span class="p">:</span>
-</span><span id="__span-2-3"><span class="w">    </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0</span><span class="nv"> </span><span class="s">*/2</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*&quot;</span><span class="w"> </span><span class="c1"># every 2 hours</span>
+</span><span id="__span-2-3"><span class="w">    </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">"0</span><span class="nv"> </span><span class="s">*/2</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*"</span><span class="w"> </span><span class="c1"># every 2 hours</span>
 </span><span id="__span-2-4"><span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> minutes</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </span></code></pre></div>
 <h2 id="what-gets-synced">What gets synced<a class="headerlink" href="#what-gets-synced" title="Permanent link">#</a></h2>
