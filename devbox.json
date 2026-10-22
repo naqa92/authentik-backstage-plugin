@@ -1,0 +1,10 @@
+{
+  "packages": [
+    "nodejs@24",
+    "yarn-berry@latest"
+  ],
+  "shell": {
+    "init_hook": [],
+    "scripts": {}
+  }
+}
