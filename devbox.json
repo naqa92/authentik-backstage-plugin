@@ -1,10 +1,9 @@
 {
-  "packages": [
-    "nodejs@24",
-    "yarn-berry@latest"
-  ],
+  "packages": [],
   "shell": {
-    "init_hook": [],
+    "init_hook": [
+      "export NVM_DIR=\"${NVM_DIR:-$HOME/.nvm}\"; case $- in *e*) _devbox_e=1;; *) _devbox_e=;; esac; set +e; . \"$NVM_DIR/nvm.sh\"; nvm use --silent >/dev/null || nvm install; [ -n \"$_devbox_e\" ] && set -e; unset _devbox_e; corepack enable"
+    ],
     "scripts": {}
   }
 }
