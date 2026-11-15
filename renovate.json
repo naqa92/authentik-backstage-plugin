@@ -34,12 +34,9 @@
       "description": "Automerge non-major updates",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": false
-    },
-    {
-      "description": "Security updates",
-      "matchUpdateTypes": ["security"],
-      "labels": ["security"],
-      "automerge": false
     }
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  }
 }
